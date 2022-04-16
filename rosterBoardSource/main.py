@@ -3,9 +3,9 @@
 """
 
 @author     : Ethan Herndon
-@date       : 08 FEB 2022
-@desc       : This program alerts Mighty Oak Medical employees every thursday when
-              it is their turn to bring breakfast via Slack
+@date       : 04 APR 2022
+@desc       : This program alerts members in a slack channel when it is their turn for 
+			  breakfast.
 """
 
 import numpy

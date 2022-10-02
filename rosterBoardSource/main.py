@@ -3,7 +3,7 @@
 """
 
 @author     : Ethan Herndon
-@date       : 04 APR 2022
+@date       : 10 OCT 2022
 @desc       : This program alerts members in a slack channel when it is their turn for 
 			  breakfast.
 """
@@ -13,8 +13,11 @@ import numpy as np
 import requests
 
 
-# Read names.txt and rotate position. When called by Crontab, alert user on Slack.
+def printToConsole(msg):
+	print(msg)
 
+
+# Read names.txt and rotate position. When called by Crontab, alert user on Slack.
 def nameSwitch():
     nameFileCurrent = open('names.txt', 'r')
     list_names = nameFileCurrent.read().splitlines()
@@ -23,11 +26,10 @@ def nameSwitch():
     with open('names.txt', 'w') as nameFileNew:
         name_array = np.array(list_names)
         nextPerson = name_array[0]
-        print('User up on deck: ' + nextPerson)
-        # print('Current names from file: ' + str(list_names))
+		printToConsole(f"User up on deck: {nextPerson}")
         list_names = numpy.roll(list_names, -1)
-        print(list_names[0] + list_names[1] + list_names[2])
-        print('Next names from file: ' + str(list_names))
+        printToConsole(f"{list_names[0]} {list_names[1]} {list_names[2]}")
+        printToConsole(f"Next names from file: {list_names}")
 
         employeeMemberID = {"Alice": "SLAKCMEMBERID",
                             "Bob": "SLAKCMEMBERID"
@@ -38,25 +40,21 @@ def nameSwitch():
             if i == nextPerson:
                 getMemberID = j
 
-        print(nextPerson + "'s member ID: " + getMemberID)
+        printToConsole(f"{nextPerson}'s member ID: {getMemberID}")
 
         memberID = str(getMemberID)
         message = '<@' + memberID + '>' + ' you are up for Breakfast tomorrow. Upcoming is: ' \
                   + '\n' + '1. ' + list_names[0]+ '\n' + '2. ' \
                   + list_names[1] + '\n' + '3. ' + list_names[2]
-
-
-        #print(message)
-
+		printToConsole(message)
         payload = '{"text": "%s"}' % message
         response = \
         requests.post('YOURSLACKAPPsWEBHOOK'
                           , data=payload)
-        print(response)
+        printToConsole(response)
 
 
         # Output back to file afterwards
-
         for name in list_names:
             nameFileNew.write(name + '\n')
 

@@ -1,6 +1,5 @@
 ## Roster Board For Slack
-
-![GitHub top language](https://img.shields.io/github/languages/top/herndone/Roster-Board-for-Slack)
+![image](https://raw.githubusercontent.com/HerndonE/Roster-Board-for-Slack/main/Images/python-slack-banner.png)
 ## Overview
 
 The roster board is a Python program designed to notify users when it's their turn for a specific activity on Slack. This can be particularly useful for coordinating activities or tasks within a team or group.
